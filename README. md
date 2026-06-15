@@ -1,0 +1,30 @@
+# Project 2 - *The Ultimate Gamer Board Trivia*
+
+Submitted by: **Gamuchirai Mubayiwa**
+
+This web app is a flashcard platform designed to test gaming knowledge across genres and eras.
+
+Time spent: **8** hours spent in total
+
+## Required Features
+
+The following **required** functionality is completed:
+
+- [x] **Header Information:** The app displays the title of the card set, a short description, and the total number of cards (10).
+- [x] **Single Card Display:** A single card is displayed at a time showing only the question initially.
+- [x] **Card Flipping:** Clicking on the card flips it over, showing the answer. Clicking again flips it back.
+- [x] **Randomization:** Clicking the next button displays a random new card (not in sequential order).
+
+The following **stretch** features are implemented:
+
+- [x] **Visual Styling:** Cards have different visual border/background colors based on their category difficulty (Easy, Medium, Hard).
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+![Walkthrough](https://imgur.com/7v1TdlE)
+
+## Notes
+Describe any challenges encountered while building the app (e.g., resolving terminal conflicts, setting up proper file routing, or fixing syntax typos).
+fixing syntax errors
