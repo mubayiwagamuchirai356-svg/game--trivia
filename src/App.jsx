@@ -6,41 +6,98 @@ import './App.css';
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [userGuess, setUserGuess] = useState('');
+  const [feedback, setFeedback] = useState(''); 
+  
+  // Stretch Feature: Streak Counters
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
 
-  // Requirement: Choose a random card (sequential order does not receive credit!)
+  const currentCard = gamerCards[currentIndex];
+
   const handleNextCard = () => {
-    setIsFlipped(false); // Requirement: Reset back to front side for the new card
-    
-    let randomIndex = currentIndex;
-    // Loop ensures you always get a genuinely *new* card, avoiding repeats
-    while (randomIndex === currentIndex) {
-      randomIndex = Math.floor(Math.random() * gamerCards.length);
+    if (currentIndex < gamerCards.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      resetCardState();
     }
-    setCurrentIndex(randomIndex);
   };
 
-  const handleCardClick = () => {
-    setIsFlipped(!isFlipped);
+  const handlePrevCard = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      resetCardState();
+    }
+  };
+
+  const resetCardState = () => {
+    setIsFlipped(false);
+    setUserGuess('');
+    setFeedback('');
+  };
+
+  const handleCheckGuess = (e) => {
+    e.preventDefault();
+    
+    const cleanGuess = userGuess.trim().toLowerCase();
+    const cleanAnswer = currentCard.answer.toLowerCase();
+
+    if (cleanGuess === cleanAnswer) {
+      setFeedback('correct');
+      const newStreak = currentStreak + 1;
+      setCurrentStreak(newStreak);
+      if (newStreak > longestStreak) {
+        setLongestStreak(newStreak);
+      }
+    } else {
+      setFeedback('wrong');
+      setCurrentStreak(0); // Reset current streak on wrong guess
+    }
   };
 
   return (
     <div className="app-layout">
-      {/* Required Feature: Title, description, and total card count */}
       <h1>🎮 The Ultimate Gamer Board Trivia</h1>
-      <p className="description">Test your gaming knowledge across eras and genres! Click the card to flip it.</p>
-      <p className="card-count">Total Cards: {gamerCards.length}</p>
+      <p className="description">Test your gaming knowledge! Type your guess before flipping.</p>
+      
+      {/* Streak Counter Display */}
+      <div className="streak-container">
+        <p>🔥 Current Streak: {currentStreak}</p>
+        <p>🏆 Longest Streak: {longestStreak}</p>
+      </div>
 
-      {/* Required Feature: Single card container */}
+      <p className="card-count">Card {currentIndex + 1} of {gamerCards.length}</p>
+
       <Card 
-        card={gamerCards[currentIndex]} 
+        card={currentCard} 
         isFlipped={isFlipped} 
-        onClick={handleCardClick} 
+        onClick={() => setIsFlipped(!isFlipped)} 
       />
 
-      {/* Required Feature: Next button for randomization */}
-      <button className="next-btn" onClick={handleNextCard}>
-        Next Card ➡️
-      </button>
+      <form onSubmit={handleCheckGuess} className="guess-form">
+        <input 
+          type="text" 
+          placeholder="Type your guess here..." 
+          value={userGuess}
+          onChange={(e) => setUserGuess(e.target.value)}
+          className={`guess-input ${feedback}`}
+        />
+        <button type="submit" className="submit-btn">Submit Guess</button>
+      </form>
+
+      {feedback && (
+        <p className={`feedback-text ${feedback}`}>
+          {feedback === 'correct' ? '✅ Correct! Splendid guess!' : '❌ Incorrect! Try again or click to flip.'}
+        </p>
+      )}
+
+      <div className="nav-controls">
+        <button className="nav-btn" onClick={handlePrevCard} disabled={currentIndex === 0}>
+          ⬅️ Back
+        </button>
+        <button className="nav-btn" onClick={handleNextCard} disabled={currentIndex === gamerCards.length - 1}>
+          Next ➡️
+        </button>
+      </div>
     </div>
   );
 }
