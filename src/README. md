@@ -1,0 +1,30 @@
+## Web Project 4 - Veni Vici!
+
+Submitted by: Gamuchirai Constantine MUBAYIWA
+
+About this web app: **A StumbleUpon-like discovery web application that allows users to randomly cycle through various dog breeds, explore their unique traits, and custom-filter their discoveries using an interactive attribute ban list.**
+
+Time spent: **[8]** hours spent in total
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='[https://imgur.com/a/RA7pq31]' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created via [ScreenToGif](https://nicke.tech/screentogif).
+
+## Required Features
+
+- [x] **Application features a 'Discover' button** that creates a new API fetch request on click and displays at least three attributes and an image obtained from the returned JSON data.
+- [x] **The type of attribute displayed for each image is consistent** across API calls (Breed, Lifespan, and Weight).
+- [x] **Only one item/API call is viewable at a time** and at least one image is displayed per API call.
+- [x] **API call response results appear random** to the user.
+- [x] **Clicking on a displayed value for one attribute adds it to a displayed ban list**.
+- [x] **Clicking on an attribute in the ban list immediately removes it** from the ban list.
+- [x] **Attributes on the ban list prevent further images/API results** with that attribute from being displayed.
+
+## Stretch Features
+
+- [x] **Multiple types of attributes are clickable** and can be added to the ban list (Breed Name, Lifespan, and Weight).
+- [x] **Users can see a stored history** of their previously viewed items from this session.
